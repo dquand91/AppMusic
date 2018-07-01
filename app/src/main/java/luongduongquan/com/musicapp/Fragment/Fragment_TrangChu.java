@@ -12,11 +12,12 @@ import luongduongquan.com.musicapp.R;
 
 public class Fragment_TrangChu extends Fragment {
 
-	@Nullable
+	View view;
+
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.fragment_trangchu, container, false);
+		view = inflater.inflate(R.layout.fragment_trangchu, container, false);
 
 		return view;
 	}

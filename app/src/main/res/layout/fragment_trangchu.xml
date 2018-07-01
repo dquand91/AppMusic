@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light">
-    <TextView
+    android:scrollbars="none"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/linearLayout_trangchu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Trang Chu"
-        android:textSize="50sp"/>
+        android:orientation="vertical" >
 
-</android.support.constraint.ConstraintLayout>
+        <fragment
+            android:name="luongduongquan.com.musicapp.Fragment.Fragment_Banner"
+            android:id="@+id/fragmentBanner_trangchu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+    </LinearLayout>
+
+
+</ScrollView>
