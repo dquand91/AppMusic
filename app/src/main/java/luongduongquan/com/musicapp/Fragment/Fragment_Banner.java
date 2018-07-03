@@ -13,7 +13,7 @@ import java.util.List;
 
 import luongduongquan.com.musicapp.Model.QuangCao;
 import luongduongquan.com.musicapp.R;
-import luongduongquan.com.musicapp.Service.APIService;
+import luongduongquan.com.musicapp.Service.APIServiceUtils;
 import luongduongquan.com.musicapp.Service.DataserviceListener;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,7 +43,7 @@ public class Fragment_Banner extends Fragment {
 
     public void getData() {
 
-        DataserviceListener dataserviceListener = APIService.getDataFromService();
+        DataserviceListener dataserviceListener = APIServiceUtils.getDataFromService();
 
         Call<List<QuangCao>> callback = dataserviceListener.getDataBanner();
         callback.enqueue(new Callback<List<QuangCao>>() {

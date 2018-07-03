@@ -5,6 +5,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class QuangCao {
 
+//    - Vào trang http://www.jsonschema2pojo.org/
+//            => đặt tên: "Class Name":QuangCao
+//	=> Target language: Java
+//	=> Source type: JSON
+//	=> Annotation style: GSON
+//  - Paste cái đoạn JSON mà server trả về vào trang web. Nó sẽ tự động sinh ra 1 Object có thuộc tính như đoạn JSON đó.
+
     @SerializedName("IdQuangCao")
     @Expose
     private String idQuangCao;
