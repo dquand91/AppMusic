@@ -14,7 +14,7 @@
 		function PlayListToday($idPlayList, $tenPlayList, $hinhAnh, $icon){
 			$this->IdPlayList = $idPlayList;
 			$this->TenPlayList = $tenPlayList;
-			$this->HinhAnh = $hinhanh;
+			$this->HinhAnh = $hinhAnh;
 			$this->Icon = $icon;
 		}
 	}
@@ -26,7 +26,7 @@
 																,$row['Ten']
 																,$row['HinhNen']
 																,$row['HinhIcon']));
-		echo json_encode($arrayPlayListForToday);
 	}
+	echo json_encode($arrayPlayListForToday);
 
  ?>

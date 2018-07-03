@@ -3,7 +3,6 @@ package luongduongquan.com.musicapp.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +26,6 @@ public class BannerAdapter extends PagerAdapter {
 	public BannerAdapter(Context context, ArrayList<QuangCao> listBanner) {
 		this.context = context;
 		this.listBanner = listBanner;
-
-
-
 	}
 
 	@Override
@@ -66,8 +62,6 @@ public class BannerAdapter extends PagerAdapter {
 
 //		backgroundViewBanner.setVisibility(View.INVISIBLE);
 
-		Log.d("QUAN123", "getHinhAnh: " + urlHinhAnh);
-		Log.d("QUAN123", "getHinhBaiHat: " + urlHinhBaiHat);
 		tvTitleSongBanner.setText(listBanner.get(position).getTenBaiHat());
 		tvDescriptionSongBanner.setText(listBanner.get(position).getNoiDung());
 

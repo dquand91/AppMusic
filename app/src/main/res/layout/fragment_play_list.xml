@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".Fragment.Fragment_PlayList"
+                android:gravity="center">
+    <TextView
+        android:id="@+id/tvTitle_Playlist"
+        android:text="Day la Title cua PlayList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:textColor="#545454"
+        />
+    <ListView
+        android:layout_below="@+id/tvTitle_Playlist"
+        android:id="@+id/listViewPlayList_Playlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/tvViewMorePlayList"
+        android:text="Xem them Playlist"
+        android:textSize="15sp"
+        android:drawablePadding="5dp"
+        android:drawableLeft="@drawable/iconmoreplaylist"
+        android:paddingLeft="5dp"
+        android:layout_below="@+id/listViewPlayList_Playlist"
+        android:textColor="#000000"
+        android:background="#c9c7c7"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+</RelativeLayout>
