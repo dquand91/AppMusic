@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <ImageView
+        android:id="@+id/imgBackground_bannerItem"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="fitXY"/>
+    
+    <View
+        android:id="@+id/backgroundView_bannerItem"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/custom_background_banner"
+        android:alpha="0.5"/>
+    
+    <RelativeLayout
+        android:id="@+id/relative_banner"
+        android:layout_alignBottom="@id/imgBackground_bannerItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/imgSongThumb_banner"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:padding="2dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/tvSongTitle_banner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/imgSongThumb_banner"
+            android:layout_toRightOf="@id/imgSongThumb_banner"
+            android:layout_marginTop="5dp"
+            android:text="Banner Title"
+            android:textSize="17sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imgSongThumb_banner"
+            android:layout_below="@id/tvSongTitle_banner"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvDescript_banner"
+                android:textSize="13sp"
+                android:maxLines="2"
+                android:layout_marginRight="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This is a dump data. This is a dump data. This is a dump data."
+                android:textColor="@android:color/white"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

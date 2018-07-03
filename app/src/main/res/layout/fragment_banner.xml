@@ -10,16 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ViewFlipper
+        <android.support.v4.view.ViewPager
             android:id="@+id/viewPager_banner"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:background="@color/colorAccent">
 
-        </ViewFlipper>
+        </android.support.v4.view.ViewPager>
 
         <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/indicatorDefault_banner"
+            android:id="@+id/circleIndicator_banner"
             android:layout_width="wrap_content"
             android:layout_height="13dp"
             android:layout_marginTop="10dp"
