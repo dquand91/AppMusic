@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import luongduongquan.com.musicapp.Model.QuangCao;
 import luongduongquan.com.musicapp.R;
+import luongduongquan.com.musicapp.Utils.MyAppUtils;
 
 ;
 
@@ -51,14 +52,14 @@ public class BannerAdapter extends PagerAdapter {
 		TextView tvDescriptionSongBanner = view.findViewById(R.id.tvDescript_banner);
 		View backgroundViewBanner = view.findViewById(R.id.backgroundView_bannerItem);
 
-		String urlHinhAnh = listBanner.get(position).getHinhAnh().replace("https", "http");
-		String urlHinhBaiHat = listBanner.get(position).getHinhBaiHat().replace("https", "http");
+//		String urlHinhAnh = listBanner.get(position).getHinhAnh().replace("https", "http");
+//		String urlHinhBaiHat = listBanner.get(position).getHinhBaiHat().replace("https", "http");
 
 //		Picasso.with(context).load(listBanner.get(position).getHinhAnh()).fit().into(imgBackground);
 //		Picasso.with(context).load(listBanner.get(position).getHinhBaiHat()).fit().into(imgSongThumbBanner);
 
-		Picasso.with(context).load(urlHinhAnh).fit().into(imgBackground);
-		Picasso.with(context).load(urlHinhBaiHat).fit().into(imgSongThumbBanner);
+		Picasso.with(context).load(MyAppUtils.replaceHTTPStoHTTP(listBanner.get(position).getHinhAnh())).fit().into(imgBackground);
+		Picasso.with(context).load(MyAppUtils.replaceHTTPStoHTTP(listBanner.get(position).getHinhBaiHat())).fit().into(imgSongThumbBanner);
 
 //		backgroundViewBanner.setVisibility(View.INVISIBLE);
 
