@@ -24,6 +24,11 @@
             android:id="@+id/fragmentPlayList_trangchu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <fragment
+            android:name="luongduongquan.com.musicapp.Fragment.Fragment_ChudeTheLoai"
+            android:id="@+id/fragmentChudeTheloai_trangchu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 
 

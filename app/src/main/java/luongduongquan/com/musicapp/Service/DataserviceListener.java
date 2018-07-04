@@ -4,6 +4,7 @@ import java.util.List;
 
 import luongduongquan.com.musicapp.Model.PlayList;
 import luongduongquan.com.musicapp.Model.QuangCao;
+import luongduongquan.com.musicapp.Model.TheLoaiTrongNgay;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -17,6 +18,9 @@ public interface DataserviceListener {
 
     @GET("playlistforcurrentday.php")
     Call<List<PlayList>> getPlayListCurrentDay();
+
+    @GET("chudevatheloai.php")
+    Call<TheLoaiTrongNgay> getTheLoaiTrongNgay();
 
 
 

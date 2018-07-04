@@ -3,7 +3,6 @@ package luongduongquan.com.musicapp.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +53,6 @@ public class PlaylistAdapter extends ArrayAdapter<PlayList> {
 		String urlHinhBaiHat = playlist.getIcon().replace("https", "http");
 		Picasso.with(getContext()).load(urlHinhAnh).fit().into(viewHolder.imgBackground);
 		Picasso.with(getContext()).load(urlHinhBaiHat).fit().into(viewHolder.imgPlayList);
-		Log.d("QUAN123 PlaylistAdapter", "urlHinhAnh: " + urlHinhAnh);
-		Log.d("QUAN123 PlaylistAdapter", "urlHinhBaiHat: " + urlHinhBaiHat);
 		viewHolder.tvName_playlist.setText(playlist.getTenPlayList());
 
 		return convertView;

@@ -1,0 +1,22 @@
+<?php
+	require "connect.php";
+	$query = "SELECT DISTINCT * FROM album ORDER BY rand(" . date("Ymd") .") LIMIT 4";
+	$dataalbum = mysqli_query($myConnect,$query);
+	
+	class Album{
+		function Album($idalbum,$tenalbum,$tencasialbum,$hinhalbum){
+				$this->IdAlbum = $idalbum;
+				$this->TenAlbum = $tenalbum;
+				$this->TencasiAlbum = $tencasialbum;
+				$this->HinhanhAlbum = $hinhalbum;
+		}
+	}
+	$arrayalbum = array();
+	while ($row = mysqli_fetch_assoc($dataalbum)) {
+		array_push($arrayalbum, new Album($row['idAlbum']
+										,$row['TenAlbum']
+										,$row['TencaSiAlbum']
+										,$row['HinhAlbum']));
+	}
+	echo json_encode($arrayalbum);
+?>
