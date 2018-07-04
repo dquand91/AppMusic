@@ -36,6 +36,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <fragment
+            android:name="luongduongquan.com.musicapp.Fragment.Fragment_BaiHatNoiBat"
+            android:id="@+id/fragmentBaiHatNoiBat_trangchu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
 
 
     </LinearLayout>

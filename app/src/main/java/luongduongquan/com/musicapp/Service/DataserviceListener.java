@@ -3,6 +3,7 @@ package luongduongquan.com.musicapp.Service;
 import java.util.List;
 
 import luongduongquan.com.musicapp.Model.Album;
+import luongduongquan.com.musicapp.Model.BaiHat;
 import luongduongquan.com.musicapp.Model.PlayList;
 import luongduongquan.com.musicapp.Model.QuangCao;
 import luongduongquan.com.musicapp.Model.TheLoaiTrongNgay;
@@ -26,6 +27,7 @@ public interface DataserviceListener {
     @GET("albumhot.php")
     Call<List<Album>> getListAlbumHost();
 
-
+    @GET("baihatnoibat.php")
+    Call<List<BaiHat>> getListBaiHatNoiBat();
 
 }
