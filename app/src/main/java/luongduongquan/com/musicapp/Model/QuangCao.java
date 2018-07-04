@@ -3,7 +3,9 @@ package luongduongquan.com.musicapp.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class QuangCao {
+import java.io.Serializable;
+
+public class QuangCao implements Serializable {
 
 //    - Vào trang http://www.jsonschema2pojo.org/
 //            => đặt tên: "Class Name":QuangCao

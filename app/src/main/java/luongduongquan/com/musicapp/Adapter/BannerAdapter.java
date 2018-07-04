@@ -1,6 +1,7 @@
 package luongduongquan.com.musicapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
@@ -13,16 +14,18 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import luongduongquan.com.musicapp.Activity.DanhSachBaiHatActivity;
 import luongduongquan.com.musicapp.Model.QuangCao;
 import luongduongquan.com.musicapp.R;
 import luongduongquan.com.musicapp.Utils.MyAppUtils;
 
-;
+;import static luongduongquan.com.musicapp.Utils.MyAppUtils.KEY_INTENT_BANNER;
 
 public class BannerAdapter extends PagerAdapter {
 
 	Context context;
 	ArrayList<QuangCao> listBanner;
+
 
 	public BannerAdapter(Context context, ArrayList<QuangCao> listBanner) {
 		this.context = context;
@@ -41,9 +44,9 @@ public class BannerAdapter extends PagerAdapter {
 
 	@NonNull
 	@Override
-	public Object instantiateItem(@NonNull ViewGroup container, int position) {
+	public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
 
-		LayoutInflater inflater = LayoutInflater.from(context);
+		final LayoutInflater inflater = LayoutInflater.from(context);
 		View view = inflater.inflate(R.layout.row_banner_item, null);
 
 		final ImageView imgBackground = view.findViewById(R.id.imgBackground_bannerItem);
@@ -61,11 +64,17 @@ public class BannerAdapter extends PagerAdapter {
 		Picasso.with(context).load(MyAppUtils.replaceHTTPStoHTTP(listBanner.get(position).getHinhAnh())).fit().into(imgBackground);
 		Picasso.with(context).load(MyAppUtils.replaceHTTPStoHTTP(listBanner.get(position).getHinhBaiHat())).fit().into(imgSongThumbBanner);
 
-//		backgroundViewBanner.setVisibility(View.INVISIBLE);
-
 		tvTitleSongBanner.setText(listBanner.get(position).getTenBaiHat());
 		tvDescriptionSongBanner.setText(listBanner.get(position).getNoiDung());
 
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intentToDanhSachBaiHat = new Intent(context, DanhSachBaiHatActivity.class);
+				intentToDanhSachBaiHat.putExtra(KEY_INTENT_BANNER, listBanner.get(position));
+				context.startActivity(intentToDanhSachBaiHat);
+			}
+		});
 		container.addView(view);
 
 		return view;
