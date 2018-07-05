@@ -1,12 +1,14 @@
 package luongduongquan.com.musicapp.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -15,11 +17,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import luongduongquan.com.musicapp.Activity.DanhSachBaiHatActivity;
 import luongduongquan.com.musicapp.Adapter.PlaylistAdapter;
 import luongduongquan.com.musicapp.Model.PlayList;
 import luongduongquan.com.musicapp.R;
 import luongduongquan.com.musicapp.Service.APIServiceUtils;
 import luongduongquan.com.musicapp.Service.DataserviceListener;
+import luongduongquan.com.musicapp.Utils.MyAppUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,6 +69,15 @@ public class Fragment_PlayList extends Fragment {
 				playlistAdapter = new PlaylistAdapter(getActivity(),android.R.layout.simple_list_item_1,listPlayList);
 				listViewPlayList.setAdapter(playlistAdapter);
 				setListViewHeightBasedOnChildren(listViewPlayList);
+
+				listViewPlayList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						Intent intentToDanhSachBaiHat = new Intent(getActivity(), DanhSachBaiHatActivity.class);
+						intentToDanhSachBaiHat.putExtra(MyAppUtils.KEY_INTENT_PLAYLIST, listPlayList.get(position));
+						startActivity(intentToDanhSachBaiHat);
+					}
+				});
 			}
 
 			@Override

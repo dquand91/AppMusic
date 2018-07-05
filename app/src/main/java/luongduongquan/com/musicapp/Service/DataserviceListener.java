@@ -8,7 +8,10 @@ import luongduongquan.com.musicapp.Model.PlayList;
 import luongduongquan.com.musicapp.Model.QuangCao;
 import luongduongquan.com.musicapp.Model.TheLoaiTrongNgay;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public interface DataserviceListener {
 
@@ -29,5 +32,13 @@ public interface DataserviceListener {
 
     @GET("baihatnoibat.php")
     Call<List<BaiHat>> getListBaiHatNoiBat();
+
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+	Call<List<BaiHat>> getListBaiHatTheoQuangCao(@Field("idquangcao") String idQuangCao);
+
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<BaiHat>> getListBaiHatTheoPlayList(@Field("idplaylist") String idPlayList);
 
 }
