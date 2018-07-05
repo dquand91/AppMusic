@@ -41,6 +41,10 @@ public interface DataserviceListener {
     @POST("danhsachbaihat.php")
     Call<List<BaiHat>> getListBaiHatTheoPlayList(@Field("idplaylist") String idPlayList);
 
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<BaiHat>> getListBaiHatTheoTheLoai(@Field("idtheloai") String idTheLoai);
+
     @GET("danhsachcacplaylist.php")
     Call<List<PlayList>> getAllPlayList();
 

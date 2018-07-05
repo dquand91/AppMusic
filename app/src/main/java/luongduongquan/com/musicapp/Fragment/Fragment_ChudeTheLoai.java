@@ -1,5 +1,6 @@
 package luongduongquan.com.musicapp.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -15,12 +16,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import luongduongquan.com.musicapp.Activity.DanhSachBaiHatActivity;
 import luongduongquan.com.musicapp.Model.ChuDe;
 import luongduongquan.com.musicapp.Model.TheLoai;
 import luongduongquan.com.musicapp.Model.TheLoaiTrongNgay;
 import luongduongquan.com.musicapp.R;
 import luongduongquan.com.musicapp.Service.APIServiceUtils;
 import luongduongquan.com.musicapp.Service.DataserviceListener;
+import luongduongquan.com.musicapp.Utils.MyAppUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,7 +60,7 @@ public class Fragment_ChudeTheLoai extends Fragment {
 				ArrayList<ChuDe> listChuDe = new ArrayList<>();
 				listChuDe.addAll(theLoaiTrongNgay.getChuDe());
 
-				ArrayList<TheLoai> listTheLoai = new ArrayList<>();
+				final ArrayList<TheLoai> listTheLoai = new ArrayList<>();
 				listTheLoai.addAll(theLoaiTrongNgay.getTheLoai());
 
 				LinearLayout linearLayout = new LinearLayout(getActivity());
@@ -93,6 +96,15 @@ public class Fragment_ChudeTheLoai extends Fragment {
 					}
 					cardView.setLayoutParams(layoutParams);
 					cardView.addView(imageView);
+					final int finalJ = j;
+					cardView.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intentToDanhSachBaiHat = new Intent(getActivity(), DanhSachBaiHatActivity.class);
+							intentToDanhSachBaiHat.putExtra(MyAppUtils.KEY_INTENT_THELOAI, listTheLoai.get(finalJ));
+							startActivity(intentToDanhSachBaiHat);
+						}
+					});
 					linearLayout.addView(cardView);
 				}
 				horizontalScrollView.addView(linearLayout);
