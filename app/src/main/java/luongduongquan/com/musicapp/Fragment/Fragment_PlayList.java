@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import luongduongquan.com.musicapp.Activity.DanhSachBaiHatActivity;
+import luongduongquan.com.musicapp.Activity.DanhSachPlayListActivity;
 import luongduongquan.com.musicapp.Adapter.PlaylistAdapter;
 import luongduongquan.com.musicapp.Model.PlayList;
 import luongduongquan.com.musicapp.R;
@@ -51,7 +52,13 @@ public class Fragment_PlayList extends Fragment {
 		tvMorePlayList = view.findViewById(R.id.tvViewMorePlayList);
 
 		getData();
-
+		tvMorePlayList.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intentToPlayListActivity = new Intent(getActivity(), DanhSachPlayListActivity.class);
+				startActivity(intentToPlayListActivity);
+			}
+		});
 		return view;
 	}
 

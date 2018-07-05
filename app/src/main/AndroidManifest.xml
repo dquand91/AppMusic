@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".Activity.DanhSachBaiHatActivity">
         </activity>
+        <activity android:name=".Activity.DanhSachPlayListActivity">
+        </activity>
     </application>
 
 </manifest>

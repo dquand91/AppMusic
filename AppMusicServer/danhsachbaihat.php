@@ -13,16 +13,16 @@
 
 	$arraydanhsachbaihat = array();
 	
-	// if(isset($_POST['idalbum'])){
-	//     $idalbum = $_POST['idalbum'];
- //    	$query = "SELECT * FROM baihat WHERE FIND_IN_SET('$idalbum',IdAlbum)";
-	// }
+	if(isset($_POST['idalbum'])){
+	    $idalbum = $_POST['idalbum'];
+    	$query = "SELECT * FROM baihat WHERE FIND_IN_SET('$idalbum',idAlbum)";
+	}
 
 	
- //    if (isset($_POST['idtheloai'])) {
-	// 	$idtheloai = $_POST['idtheloai'];
-	// 	$query = "SELECT * FROM baihat WHERE FIND_IN_SET('$idtheloai',IdTheLoai)";
-	// }
+    if (isset($_POST['idtheloai'])) {
+		$idtheloai = $_POST['idtheloai'];
+		$query = "SELECT * FROM baihat WHERE FIND_IN_SET('$idtheloai',idTheLoai)";
+	}
 
 	if (isset($_POST['idplaylist'])) {
 		$idplaylist =$_POST['idplaylist'] ;
