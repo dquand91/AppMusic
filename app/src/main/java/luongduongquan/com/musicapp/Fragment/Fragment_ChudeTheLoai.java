@@ -11,11 +11,13 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import luongduongquan.com.musicapp.Activity.AllChuDeActivity;
 import luongduongquan.com.musicapp.Activity.DanhSachBaiHatActivity;
 import luongduongquan.com.musicapp.Model.ChuDe;
 import luongduongquan.com.musicapp.Model.TheLoai;
@@ -34,6 +36,7 @@ public class Fragment_ChudeTheLoai extends Fragment {
 	final String TAG = this.getClass().getSimpleName();
 	View view;
 	HorizontalScrollView horizontalScrollView;
+	TextView tvXemTatCaChuDe;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +44,14 @@ public class Fragment_ChudeTheLoai extends Fragment {
 		// Inflate the layout for this fragment
 		view = inflater.inflate(R.layout.fragment_chude_the_loai, container, false);
 		horizontalScrollView = view.findViewById(R.id.horizontalScroll_ChudeTheloai);
+		tvXemTatCaChuDe = view.findViewById(R.id.tvXemThem_ChudeTheloai);
+		tvXemTatCaChuDe.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intentToAllChuDe = new Intent(getActivity(), AllChuDeActivity.class);
+				startActivity(intentToAllChuDe);
+			}
+		});
 		getData();
 		return view;
 	}
@@ -57,7 +68,7 @@ public class Fragment_ChudeTheLoai extends Fragment {
 			public void onResponse(Call<TheLoaiTrongNgay> call, Response<TheLoaiTrongNgay> response) {
 				TheLoaiTrongNgay theLoaiTrongNgay = response.body();
 
-				ArrayList<ChuDe> listChuDe = new ArrayList<>();
+				final ArrayList<ChuDe> listChuDe = new ArrayList<>();
 				listChuDe.addAll(theLoaiTrongNgay.getChuDe());
 
 				final ArrayList<TheLoai> listTheLoai = new ArrayList<>();
