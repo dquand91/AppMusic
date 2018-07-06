@@ -8,11 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import luongduongquan.com.musicapp.Model.BaiHat;
 import luongduongquan.com.musicapp.R;
+import luongduongquan.com.musicapp.Service.APIServiceUtils;
+import luongduongquan.com.musicapp.Service.DataserviceListener;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DanhSachBaiHatAdapter extends RecyclerView.Adapter<DanhSachBaiHatAdapter.DanhSachBaiHatViewHolder> {
 
@@ -63,6 +69,34 @@ public class DanhSachBaiHatAdapter extends RecyclerView.Adapter<DanhSachBaiHatAd
 			tvTenBaiHat = itemView.findViewById(R.id.tvTenBaiHat_ItemDanhsachbaihat);
 			tvTenCasi = itemView.findViewById(R.id.tvTenCaSi_ItemDanhsachbaihat);
 			imgLuotThich = itemView.findViewById(R.id.imgLuotThich_ItemDanhsachbaihat);
+
+			imgLuotThich.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					imgLuotThich.setImageDrawable(context.getResources().getDrawable(R.drawable.iconloved));
+					DataserviceListener dataserviceListener = APIServiceUtils.getDataFromService();
+					Call<String> callBack = dataserviceListener.updateLuotThich("1", listBaiHat.get(getAdapterPosition()).getIdbaihat());
+					callBack.enqueue(new Callback<String>() {
+						@Override
+						public void onResponse(Call<String> call, Response<String> response) {
+							String ketqua = response.body();
+							if(ketqua.equals("Success")){
+								Toast.makeText(context, "Đã thích", Toast.LENGTH_SHORT).show();
+								imgLuotThich.setEnabled(false);
+							} else {
+								Toast.makeText(context, "Lỗi update Luot Thich", Toast.LENGTH_SHORT).show();
+								imgLuotThich.setImageDrawable(context.getResources().getDrawable(R.drawable.iconlove));
+							}
+						}
+
+						@Override
+						public void onFailure(Call<String> call, Throwable t) {
+
+						}
+					});
+
+				}
+			});
 
 		}
 	}

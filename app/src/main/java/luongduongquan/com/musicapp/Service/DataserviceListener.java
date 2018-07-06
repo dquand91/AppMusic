@@ -60,4 +60,8 @@ public interface DataserviceListener {
     @GET("tatcaalbum.php")
     Call<List<Album>> getAllAlbum();
 
+    @FormUrlEncoded
+    @POST("updateluotthich.php")
+    Call<String> updateLuotThich(@Field("luotthich") String luotThich, @Field("idbaihat") String idBaiHat);
+
 }
