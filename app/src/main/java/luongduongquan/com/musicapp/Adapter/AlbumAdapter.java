@@ -1,6 +1,7 @@
 package luongduongquan.com.musicapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import luongduongquan.com.musicapp.Activity.DanhSachBaiHatActivity;
 import luongduongquan.com.musicapp.Model.Album;
 import luongduongquan.com.musicapp.R;
 import luongduongquan.com.musicapp.Utils.MyAppUtils;
@@ -58,6 +60,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 			imgHinhAlbum = itemView.findViewById(R.id.imgAlbum_album);
 			tvTenAlbum = itemView.findViewById(R.id.tvTenAlbum_album);
 			tvCasiAlbum = itemView.findViewById(R.id.tvTenCaSi_Album);
+			imgHinhAlbum.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intentToDanhSachBaiHat = new Intent(context, DanhSachBaiHatActivity.class);
+					intentToDanhSachBaiHat.putExtra(MyAppUtils.KEY_INTENT_ALBUM, listAlbum.get(getAdapterPosition()));
+					context.startActivity(intentToDanhSachBaiHat);
+				}
+			});
 		}
 	}
 

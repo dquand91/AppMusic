@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import luongduongquan.com.musicapp.Adapter.DanhSachBaiHatAdapter;
+import luongduongquan.com.musicapp.Model.Album;
 import luongduongquan.com.musicapp.Model.BaiHat;
 import luongduongquan.com.musicapp.Model.PlayList;
 import luongduongquan.com.musicapp.Model.QuangCao;
@@ -42,6 +43,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
 	QuangCao quangCao;
 	PlayList playlist;
 	TheLoai theloai;
+	Album album;
 
 	CoordinatorLayout coordinatorLayout;
 	CollapsingToolbarLayout collapsingToolbarLayout;
@@ -72,6 +74,10 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
 		if(theloai != null && !theloai.getTenTheLoai().isEmpty()){
 			setValueInView(theloai.getTenTheLoai(), MyAppUtils.replaceHTTPStoHTTP(theloai.getHinhTheLoai()));
 			getDataTheLoai(theloai.getIdTheLoai());
+		}
+		if(album != null && !album.getTenAlbum().isEmpty()){
+			setValueInView(album.getTenAlbum(), MyAppUtils.replaceHTTPStoHTTP(album.getHinhanhAlbum()));
+			getDataTheLoai(album.getIdAlbum());
 		}
 	}
 
@@ -218,6 +224,9 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
 			}
 			if(intent.hasExtra(MyAppUtils.KEY_INTENT_THELOAI)){
 				theloai = (TheLoai) intent.getSerializableExtra(MyAppUtils.KEY_INTENT_THELOAI);
+			}
+			if(intent.hasExtra(MyAppUtils.KEY_INTENT_ALBUM)){
+				album = (Album) intent.getSerializableExtra(MyAppUtils.KEY_INTENT_ALBUM);
 			}
 
 		}
