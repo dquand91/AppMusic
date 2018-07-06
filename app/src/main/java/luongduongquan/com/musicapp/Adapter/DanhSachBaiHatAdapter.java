@@ -1,6 +1,7 @@
 package luongduongquan.com.musicapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,10 +13,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import luongduongquan.com.musicapp.Activity.PlayNhacActivity;
 import luongduongquan.com.musicapp.Model.BaiHat;
 import luongduongquan.com.musicapp.R;
 import luongduongquan.com.musicapp.Service.APIServiceUtils;
 import luongduongquan.com.musicapp.Service.DataserviceListener;
+import luongduongquan.com.musicapp.Utils.MyAppUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -94,6 +97,16 @@ public class DanhSachBaiHatAdapter extends RecyclerView.Adapter<DanhSachBaiHatAd
 
 						}
 					});
+
+				}
+			});
+
+			itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intentToPlayNhac = new Intent(context, PlayNhacActivity.class);
+					intentToPlayNhac.putExtra(MyAppUtils.KEY_INTENT_BAIHAT, listBaiHat.get(getAdapterPosition()));
+					context.startActivity(intentToPlayNhac);
 
 				}
 			});

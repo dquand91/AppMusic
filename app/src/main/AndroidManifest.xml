@@ -29,6 +29,8 @@
         </activity>
         <activity android:name=".Activity.AllAlbumActivity">
         </activity>
+        <activity android:name=".Activity.PlayNhacActivity">
+        </activity>
     </application>
 
 </manifest>

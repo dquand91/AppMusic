@@ -91,12 +91,13 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
 			public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
 				listBaiHat = (ArrayList<BaiHat>) response.body();
 
-				danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(getBaseContext(), listBaiHat);
+				danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(DanhSachBaiHatActivity.this, listBaiHat);
 
 				LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DanhSachBaiHatActivity.this);
 				linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 				recyclerViewDanhSachBaiHat.setLayoutManager(linearLayoutManager);
 				recyclerViewDanhSachBaiHat.setAdapter(danhSachBaiHatAdapter);
+				eventClick();
 			}
 
 			@Override
@@ -117,12 +118,13 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
 			public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
 				listBaiHat = (ArrayList<BaiHat>) response.body();
 
-				danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(getBaseContext(), listBaiHat);
+				danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(DanhSachBaiHatActivity.this, listBaiHat);
 
 				LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DanhSachBaiHatActivity.this);
 				linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 				recyclerViewDanhSachBaiHat.setLayoutManager(linearLayoutManager);
 				recyclerViewDanhSachBaiHat.setAdapter(danhSachBaiHatAdapter);
+				eventClick();
 
 			}
 
@@ -165,12 +167,13 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
 			public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
 				listBaiHat = (ArrayList<BaiHat>) response.body();
 
-				danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(getBaseContext(), listBaiHat);
+				danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(DanhSachBaiHatActivity.this, listBaiHat);
 
 				LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DanhSachBaiHatActivity.this);
 				linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 				recyclerViewDanhSachBaiHat.setLayoutManager(linearLayoutManager);
 				recyclerViewDanhSachBaiHat.setAdapter(danhSachBaiHatAdapter);
+				eventClick();
 
 			}
 
@@ -197,6 +200,8 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
 		//Phần scroll ảnh hưởng toolbar
 		collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
 		collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+
+		floatingActionButton.setEnabled(false);
 
 
 
@@ -231,6 +236,18 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
 
 		}
 
+	}
+
+	private  void eventClick(){
+		floatingActionButton.setEnabled(true);
+		floatingActionButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intentToPlayNhac = new Intent(DanhSachBaiHatActivity.this, PlayNhacActivity.class);
+				intentToPlayNhac.putExtra(MyAppUtils.KEY_INTENT_LIST_BAIHAT, listBaiHat);
+				startActivity(intentToPlayNhac);
+			}
+		});
 	}
 
 

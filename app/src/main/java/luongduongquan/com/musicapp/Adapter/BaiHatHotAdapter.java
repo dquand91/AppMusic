@@ -1,6 +1,7 @@
 package luongduongquan.com.musicapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import luongduongquan.com.musicapp.Activity.PlayNhacActivity;
 import luongduongquan.com.musicapp.Model.BaiHat;
 import luongduongquan.com.musicapp.R;
 import luongduongquan.com.musicapp.Service.APIServiceUtils;
@@ -94,6 +96,16 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.BaiH
 
 						}
 					});
+
+				}
+			});
+
+			itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intentToPlayNhac = new Intent(context, PlayNhacActivity.class);
+					intentToPlayNhac.putExtra(MyAppUtils.KEY_INTENT_BAIHAT, listBaiHat.get(getAdapterPosition()));
+					context.startActivity(intentToPlayNhac);
 
 				}
 			});
