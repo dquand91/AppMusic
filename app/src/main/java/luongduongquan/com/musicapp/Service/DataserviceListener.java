@@ -7,6 +7,7 @@ import luongduongquan.com.musicapp.Model.BaiHat;
 import luongduongquan.com.musicapp.Model.ChuDe;
 import luongduongquan.com.musicapp.Model.PlayList;
 import luongduongquan.com.musicapp.Model.QuangCao;
+import luongduongquan.com.musicapp.Model.TheLoai;
 import luongduongquan.com.musicapp.Model.TheLoaiTrongNgay;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -51,5 +52,9 @@ public interface DataserviceListener {
 
     @GET("tatcachude.php")
     Call<List<ChuDe>> getAllChuDe();
+
+    @FormUrlEncoded
+    @POST("theloaitheochude.php")
+    Call<List<TheLoai>> getTheLoaiTheoChuDe(@Field("idchude") String idChuDe);
 
 }

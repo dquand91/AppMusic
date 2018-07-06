@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import luongduongquan.com.musicapp.Activity.AllChuDeActivity;
+import luongduongquan.com.musicapp.Activity.AllTheLoaiTheoChuDeActivity;
 import luongduongquan.com.musicapp.Activity.DanhSachBaiHatActivity;
 import luongduongquan.com.musicapp.Model.ChuDe;
 import luongduongquan.com.musicapp.Model.TheLoai;
@@ -92,6 +93,15 @@ public class Fragment_ChudeTheLoai extends Fragment {
 					}
 					cardView.setLayoutParams(layoutParams);
 					cardView.addView(imageView);
+					final int finalI = i;
+					cardView.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intentToTheLoaiTheoChuDe = new Intent(getActivity(), AllTheLoaiTheoChuDeActivity.class);
+							intentToTheLoaiTheoChuDe.putExtra(MyAppUtils.KEY_INTENT_CHUDE, listChuDe.get(finalI));
+							startActivity(intentToTheLoaiTheoChuDe);
+						}
+					});
 					linearLayout.addView(cardView);
 				}
 

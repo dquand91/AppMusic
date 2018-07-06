@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".Activity.AllChuDeActivity">
         </activity>
+        <activity android:name=".Activity.AllTheLoaiTheoChuDeActivity">
+        </activity>
     </application>
 
 </manifest>

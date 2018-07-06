@@ -1,6 +1,7 @@
 package luongduongquan.com.musicapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import luongduongquan.com.musicapp.Activity.AllTheLoaiTheoChuDeActivity;
 import luongduongquan.com.musicapp.Model.ChuDe;
 import luongduongquan.com.musicapp.R;
 import luongduongquan.com.musicapp.Utils.MyAppUtils;
@@ -60,6 +62,14 @@ public class AllChuDeAdapter extends RecyclerView.Adapter<AllChuDeAdapter.AllChu
 			super(itemView);
 
 			imgChuDe = itemView.findViewById(R.id.imgChuDe_AllChuDeItem);
+			imgChuDe.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intentToAllTheLoai = new Intent(context, AllTheLoaiTheoChuDeActivity.class);
+					intentToAllTheLoai.putExtra(MyAppUtils.KEY_INTENT_CHUDE, listChuDe.get(getPosition()));
+					context.startActivity(intentToAllTheLoai);
+				}
+			});
 
 		}
 	}
