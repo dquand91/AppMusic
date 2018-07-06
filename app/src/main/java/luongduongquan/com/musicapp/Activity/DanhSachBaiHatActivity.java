@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -60,6 +62,11 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_danh_sach_bai_hat);
+
+		// Để kiểm tra mạng tránh lỗi
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+
 		getDataIntent();
 		initView();
 		init();
@@ -243,6 +250,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
 		floatingActionButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Log.d(getClass().getSimpleName(), "onClick: ");
 				Intent intentToPlayNhac = new Intent(DanhSachBaiHatActivity.this, PlayNhacActivity.class);
 				intentToPlayNhac.putExtra(MyAppUtils.KEY_INTENT_LIST_BAIHAT, listBaiHat);
 				startActivity(intentToPlayNhac);

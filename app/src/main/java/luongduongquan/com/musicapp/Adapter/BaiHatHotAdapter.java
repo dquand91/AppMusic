@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,6 +104,7 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.BaiH
 			itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					Log.d(context.getClass().getSimpleName(), "onClick: ");
 					Intent intentToPlayNhac = new Intent(context, PlayNhacActivity.class);
 					intentToPlayNhac.putExtra(MyAppUtils.KEY_INTENT_BAIHAT, listBaiHat.get(getAdapterPosition()));
 					context.startActivity(intentToPlayNhac);

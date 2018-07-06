@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 
+import com.squareup.picasso.Picasso;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import luongduongquan.com.musicapp.R;
 
@@ -43,6 +45,10 @@ public class Fragment_DiaNhac extends Fragment {
 
 
 		return view;
+	}
+
+	public void setImagePlayNhac(String linkHinhAnh){
+		Picasso.with(getActivity()).load(linkHinhAnh).into(circleImageView);
 	}
 
 }
