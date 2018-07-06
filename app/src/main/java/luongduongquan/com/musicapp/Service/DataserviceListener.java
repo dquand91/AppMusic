@@ -57,4 +57,7 @@ public interface DataserviceListener {
     @POST("theloaitheochude.php")
     Call<List<TheLoai>> getTheLoaiTheoChuDe(@Field("idchude") String idChuDe);
 
+    @GET("tatcaalbum.php")
+    Call<List<Album>> getAllAlbum();
+
 }

@@ -1,6 +1,7 @@
 package luongduongquan.com.musicapp.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import luongduongquan.com.musicapp.Activity.AllAlbumActivity;
 import luongduongquan.com.musicapp.Adapter.AlbumAdapter;
 import luongduongquan.com.musicapp.Model.Album;
 import luongduongquan.com.musicapp.R;
@@ -39,6 +41,13 @@ public class Fragment_AlbumHot extends Fragment {
 		view = inflater.inflate(R.layout.fragment_album_hot, container, false);
 		recyclerViewAlbum = view.findViewById(R.id.recyclerView_album);
 		tvThemAlbum = view.findViewById(R.id.tvXemThem_album);
+		tvThemAlbum.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intentToAllAlbum = new Intent(getActivity(), AllAlbumActivity.class);
+				startActivity(intentToAllAlbum);
+			}
+		});
 		getData();
 		return view;
 	}
