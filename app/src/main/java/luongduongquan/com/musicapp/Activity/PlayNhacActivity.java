@@ -20,6 +20,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Random;
 
 import luongduongquan.com.musicapp.Adapter.ViewPagerPlayNhacAdapter;
 import luongduongquan.com.musicapp.Fragment.Fragment_DiaNhac;
@@ -46,13 +47,17 @@ public class PlayNhacActivity extends AppCompatActivity {
 
 	ProgressDialog progressDialog;
 
+	int position = 0;
+	boolean repeat = false;
+	boolean checkRandom = false;
+	boolean next = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_play_nhac);
-		Log.d("QUAN123", "PlayNhacActivity onCreate: ");
 		progressDialog = new ProgressDialog(PlayNhacActivity.this);
 		progressDialog.show();
+		setContentView(R.layout.activity_play_nhac);
 
 		// Để kiểm tra mạng tránh lỗi
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -76,6 +81,11 @@ public class PlayNhacActivity extends AppCompatActivity {
 				if(adapterViewPagerPlayNhac.getItem(1) != null){
 					if(listBaiHatPlay.size() > 0){
 						fragment_diaNhac.setImagePlayNhac(MyAppUtils.replaceHTTPStoHTTP(listBaiHatPlay.get(0).getHinhbaihat()));
+						if(listBaiHatPlay.size() > 0){
+							getSupportActionBar().setTitle(listBaiHatPlay.get(0).getTenbaihat());
+							new PlayMusicMp3().execute(listBaiHatPlay.get(0).getLinkbaihat());
+							btnPlay.setImageResource(R.drawable.iconpause);
+						}
 						handler.removeCallbacks(this);
 					} else {
 						// Khi mà Không thể load hình ảnh ra được, thì nó sẽ tiếp tục mỗi 300s sẽ chạy tiếp cái handler này để load hình ảnh.
@@ -94,6 +104,162 @@ public class PlayNhacActivity extends AppCompatActivity {
 					mediaPlayer.start();
 					btnPlay.setImageResource(R.drawable.iconpause);
 				}
+			}
+		});
+
+		btnRepeat.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(!repeat){
+					if(checkRandom){
+						checkRandom = false;
+//						btnRepeat.setImageResource(R.drawable.iconsyned);
+						btnShuffle.setImageResource(R.drawable.iconsuffle);
+					}
+					btnRepeat.setImageResource(R.drawable.iconsyned);
+					repeat = true;
+				} else {
+					btnRepeat.setImageResource(R.drawable.iconrepeat);
+					repeat = false;
+				}
+			}
+		});
+
+		btnShuffle.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(!checkRandom){
+					if(repeat){
+						repeat = false;
+						btnRepeat.setImageResource(R.drawable.iconrepeat);
+//						btnShuffle.setImageResource(R.drawable.iconshuffled);
+					}
+					btnShuffle.setImageResource(R.drawable.iconshuffled);
+					checkRandom = true;
+				} else {
+					btnShuffle.setImageResource(R.drawable.iconsuffle);
+					checkRandom = false;
+				}
+			}
+		});
+
+		seakBarTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				mediaPlayer.seekTo(seekBar.getProgress());
+			}
+		});
+
+		btnNext.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(listBaiHatPlay.size() > 0){
+					// Nếu đang playing thì dừng rồi mới next
+					if(mediaPlayer.isPlaying() || mediaPlayer != null){
+						mediaPlayer.stop();
+						mediaPlayer.release();
+						mediaPlayer = null;
+					}
+
+					// Nếu position hiện tại vẫn còn nhỏ hơn listSize thì xủ lý
+					if(position < listBaiHatPlay.size()){
+						btnPlay.setImageResource(R.drawable.iconpause);
+						position++;
+
+						if(repeat){
+							// trường hợp bài đang play là bài cuối cùng của List, mà mình bấm Next => position = 0 => mình sẽ cho nó play lại bài cuối cùng đó.
+							if(position == 0){
+								position = listBaiHatPlay.size();
+							}
+							// Nếu đang setting repeat thì bấm next sẽ quay về phát bài hiện tại
+							position = position - 1;
+						}
+
+						if(checkRandom){
+							Random random = new Random();
+							int indexRandom = random.nextInt(listBaiHatPlay.size());
+							if(indexRandom == position){
+								position = indexRandom - 1;
+							} else {
+								position = indexRandom;
+							}
+						}
+						if(position > (listBaiHatPlay.size() -1)){
+							position = 0;
+						}
+						new PlayMusicMp3().execute(listBaiHatPlay.get(position).getLinkbaihat());
+						fragment_diaNhac.setImagePlayNhac(MyAppUtils.replaceHTTPStoHTTP(listBaiHatPlay.get(position).getHinhbaihat()));
+						getSupportActionBar().setTitle(listBaiHatPlay.get(position).getTenbaihat());
+					}
+				}
+				// Delay 5s mỗi lần nhấn button. Để tránh bấm liên tiếp nhiều lần.
+				btnPrev.setClickable(false);
+				btnNext.setClickable(false);
+				Handler handler = new Handler();
+				handler.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						btnPrev.setClickable(true);
+						btnNext.setClickable(true);
+					}
+				}, 5000);
+			}
+		});
+
+		btnPrev.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(listBaiHatPlay.size() > 0){
+					if(mediaPlayer.isPlaying() || mediaPlayer != null){
+						mediaPlayer.stop();
+						mediaPlayer.release();
+						mediaPlayer = null;
+					}
+					if(position < listBaiHatPlay.size()){
+						btnPlay.setImageResource(R.drawable.iconpause);
+						position--;
+
+						if(position < 0){
+							position = listBaiHatPlay.size() - 1;
+						}
+
+						if(repeat){
+							position = position + 1;
+						}
+						if(checkRandom){
+							Random random = new Random();
+							int indexRandom = random.nextInt(listBaiHatPlay.size());
+							if(indexRandom == position){
+								position = indexRandom - 1;
+							}
+							position = indexRandom;
+						}
+						new PlayMusicMp3().execute(listBaiHatPlay.get(position).getLinkbaihat());
+						fragment_diaNhac.setImagePlayNhac(MyAppUtils.replaceHTTPStoHTTP(listBaiHatPlay.get(position).getHinhbaihat()));
+						getSupportActionBar().setTitle(listBaiHatPlay.get(position).getTenbaihat());
+					}
+				}
+				// Delay 5s mỗi lần nhấn button. Để tránh bấm liên tiếp nhiều lần.
+				btnPrev.setClickable(false);
+				btnNext.setClickable(false);
+				Handler handler = new Handler();
+				handler.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						btnPrev.setClickable(true);
+						btnNext.setClickable(true);
+					}
+				}, 5000);
 			}
 		});
 
@@ -147,11 +313,7 @@ public class PlayNhacActivity extends AppCompatActivity {
 
 		fragment_diaNhac = (Fragment_DiaNhac) adapterViewPagerPlayNhac.getItem(1); // để lấy ra cái fragment đĩa nhạc đang hiển thị
 
-		if(listBaiHatPlay.size() > 0){
-			getSupportActionBar().setTitle(listBaiHatPlay.get(0).getTenbaihat());
-			new PlayMusicMp3().execute(listBaiHatPlay.get(0).getLinkbaihat());
-			btnPlay.setImageResource(R.drawable.iconpause);
-		}
+
 
 
 
@@ -178,6 +340,13 @@ public class PlayNhacActivity extends AppCompatActivity {
 	}
 
 	class PlayMusicMp3 extends AsyncTask<String,Void,String>{
+
+		@Override
+		protected void onPreExecute() {
+
+			super.onPreExecute();
+
+		}
 
 		@Override
 		protected String doInBackground(String... strings) {
@@ -207,6 +376,7 @@ public class PlayNhacActivity extends AppCompatActivity {
 			mediaPlayer.start();
 //			progressDialog.dismiss();
 			TimeSong();
+			progressDialog.dismiss();
 
 		}
 	}
