@@ -200,6 +200,7 @@ public class PlayNhacActivity extends AppCompatActivity {
 						new PlayMusicMp3().execute(listBaiHatPlay.get(position).getLinkbaihat());
 						fragment_diaNhac.setImagePlayNhac(MyAppUtils.replaceHTTPStoHTTP(listBaiHatPlay.get(position).getHinhbaihat()));
 						getSupportActionBar().setTitle(listBaiHatPlay.get(position).getTenbaihat());
+						UpdateTimeSong();
 					}
 				}
 				// Delay 5s mỗi lần nhấn button. Để tránh bấm liên tiếp nhiều lần.
@@ -247,6 +248,7 @@ public class PlayNhacActivity extends AppCompatActivity {
 						new PlayMusicMp3().execute(listBaiHatPlay.get(position).getLinkbaihat());
 						fragment_diaNhac.setImagePlayNhac(MyAppUtils.replaceHTTPStoHTTP(listBaiHatPlay.get(position).getHinhbaihat()));
 						getSupportActionBar().setTitle(listBaiHatPlay.get(position).getTenbaihat());
+						UpdateTimeSong();
 					}
 				}
 				// Delay 5s mỗi lần nhấn button. Để tránh bấm liên tiếp nhiều lần.
@@ -360,6 +362,8 @@ public class PlayNhacActivity extends AppCompatActivity {
 			try {
 				mediaPlayer = new MediaPlayer();
 				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+				// Xử lý sau khi play xong 1 bài
 				mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 					@Override
 					public void onCompletion(MediaPlayer mp) {
@@ -376,6 +380,7 @@ public class PlayNhacActivity extends AppCompatActivity {
 			mediaPlayer.start();
 //			progressDialog.dismiss();
 			TimeSong();
+			UpdateTimeSong();
 			progressDialog.dismiss();
 
 		}
@@ -389,4 +394,100 @@ public class PlayNhacActivity extends AppCompatActivity {
 
 
 	}
+
+	private void UpdateTimeSong(){
+
+		final Handler handler = new Handler();
+		// Mỗi 300ms nó sẽ cập nhật cái thời gian và thanh seekBar 1 lần.
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if(mediaPlayer != null){
+					seakBarTime.setProgress(mediaPlayer.getCurrentPosition());
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+					tvTimeSong.setText(simpleDateFormat.format(mediaPlayer.getCurrentPosition()));
+					handler.postDelayed(this, 300);
+
+					// Call back xử lý sau khi play xong 1 bài.
+					mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+						@Override
+						public void onCompletion(MediaPlayer mp) {
+							next = true;
+							try {
+								// Cho nghỉ khoảng 1 giây để chờ cái cái "handlerNextPlay" bên dưới.
+								Thread.sleep(1000);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+					});
+				}
+			}
+		}, 300);
+
+		final Handler handlerNextPlay = new Handler();
+		handlerNextPlay.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if(next){
+					if(listBaiHatPlay.size() > 0){
+						// Nếu đang playing thì dừng rồi mới next
+						if(mediaPlayer.isPlaying() || mediaPlayer != null){
+							mediaPlayer.stop();
+							mediaPlayer.release();
+							mediaPlayer = null;
+						}
+
+						// Nếu position hiện tại vẫn còn nhỏ hơn listSize thì xủ lý
+						if(position < listBaiHatPlay.size()){
+							btnPlay.setImageResource(R.drawable.iconpause);
+							position++;
+
+							if(repeat){
+								// trường hợp bài đang play là bài cuối cùng của List, mà mình bấm Next => position = 0 => mình sẽ cho nó play lại bài cuối cùng đó.
+								if(position == 0){
+									position = listBaiHatPlay.size();
+								}
+								// Nếu đang setting repeat thì bấm next sẽ quay về phát bài hiện tại
+								position = position - 1;
+							}
+
+							if(checkRandom){
+								Random random = new Random();
+								int indexRandom = random.nextInt(listBaiHatPlay.size());
+								if(indexRandom == position){
+									position = indexRandom - 1;
+								} else {
+									position = indexRandom;
+								}
+							}
+							if(position > (listBaiHatPlay.size() -1)){
+								position = 0;
+							}
+							new PlayMusicMp3().execute(listBaiHatPlay.get(position).getLinkbaihat());
+							fragment_diaNhac.setImagePlayNhac(MyAppUtils.replaceHTTPStoHTTP(listBaiHatPlay.get(position).getHinhbaihat()));
+							getSupportActionBar().setTitle(listBaiHatPlay.get(position).getTenbaihat());
+						}
+					}
+					// Delay 5s mỗi lần nhấn button. Để tránh bấm liên tiếp nhiều lần.
+					btnPrev.setClickable(false);
+					btnNext.setClickable(false);
+					Handler handler = new Handler();
+					handler.postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							btnPrev.setClickable(true);
+							btnNext.setClickable(true);
+						}
+					}, 5000);
+					next = false;
+					handlerNextPlay.removeCallbacks(this);
+				} else {
+					handlerNextPlay.postDelayed(this, 1000);
+				}
+			}
+		}, 1000);
+
+	}
+
 }
