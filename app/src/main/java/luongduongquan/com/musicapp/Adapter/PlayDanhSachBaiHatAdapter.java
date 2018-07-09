@@ -1,6 +1,7 @@
 package luongduongquan.com.musicapp.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ public class PlayDanhSachBaiHatAdapter extends RecyclerView.Adapter<PlayDanhSach
 
 	Context context;
 	ArrayList<BaiHat> listPlayBaiHat;
+
+	int selected_position = 0;
 
 	public PlayDanhSachBaiHatAdapter(Context context, ArrayList<BaiHat> listPlayBaiHat) {
 		this.context = context;
@@ -42,7 +45,8 @@ public class PlayDanhSachBaiHatAdapter extends RecyclerView.Adapter<PlayDanhSach
 		holder.tvTenBaiHat.setText(baiHat.getTenbaihat());
 		holder.tvTenCasi.setText(baiHat.getCasi());
 
-
+		// Here I am just highlighting the background
+		holder.itemView.setBackgroundColor(selected_position == position ? Color.GREEN : Color.TRANSPARENT);
 	}
 
 	@Override
@@ -62,6 +66,14 @@ public class PlayDanhSachBaiHatAdapter extends RecyclerView.Adapter<PlayDanhSach
 			tvTenCasi = itemView.findViewById(R.id.tvCaSi_PlayNhacItem);
 
 		}
+	}
+
+	public int getSelected_position() {
+		return selected_position;
+	}
+
+	public void setSelected_position(int selected_position) {
+		this.selected_position = selected_position;
 	}
 
 }

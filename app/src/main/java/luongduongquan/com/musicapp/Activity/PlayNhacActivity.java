@@ -85,6 +85,7 @@ public class PlayNhacActivity extends AppCompatActivity {
 							getSupportActionBar().setTitle(listBaiHatPlay.get(0).getTenbaihat());
 							new PlayMusicMp3().execute(listBaiHatPlay.get(0).getLinkbaihat());
 							btnPlay.setImageResource(R.drawable.iconpause);
+							fragment_playDanhSachBaiHat.updateSelectedPosition(position);
 						}
 						handler.removeCallbacks(this);
 					} else {
@@ -201,6 +202,7 @@ public class PlayNhacActivity extends AppCompatActivity {
 						fragment_diaNhac.setImagePlayNhac(MyAppUtils.replaceHTTPStoHTTP(listBaiHatPlay.get(position).getHinhbaihat()));
 						getSupportActionBar().setTitle(listBaiHatPlay.get(position).getTenbaihat());
 						UpdateTimeSong();
+						fragment_playDanhSachBaiHat.updateSelectedPosition(position);
 					}
 				}
 				// Delay 5s mỗi lần nhấn button. Để tránh bấm liên tiếp nhiều lần.
@@ -249,6 +251,7 @@ public class PlayNhacActivity extends AppCompatActivity {
 						fragment_diaNhac.setImagePlayNhac(MyAppUtils.replaceHTTPStoHTTP(listBaiHatPlay.get(position).getHinhbaihat()));
 						getSupportActionBar().setTitle(listBaiHatPlay.get(position).getTenbaihat());
 						UpdateTimeSong();
+						fragment_playDanhSachBaiHat.updateSelectedPosition(position);
 					}
 				}
 				// Delay 5s mỗi lần nhấn button. Để tránh bấm liên tiếp nhiều lần.
@@ -467,6 +470,7 @@ public class PlayNhacActivity extends AppCompatActivity {
 							new PlayMusicMp3().execute(listBaiHatPlay.get(position).getLinkbaihat());
 							fragment_diaNhac.setImagePlayNhac(MyAppUtils.replaceHTTPStoHTTP(listBaiHatPlay.get(position).getHinhbaihat()));
 							getSupportActionBar().setTitle(listBaiHatPlay.get(position).getTenbaihat());
+							fragment_playDanhSachBaiHat.updateSelectedPosition(position);
 						}
 					}
 					// Delay 5s mỗi lần nhấn button. Để tránh bấm liên tiếp nhiều lần.
@@ -488,6 +492,13 @@ public class PlayNhacActivity extends AppCompatActivity {
 			}
 		}, 1000);
 
+	}
+
+	private void highlightSeclectedItem(){
+
+
+		// Updating old as well as new positions
+		fragment_playDanhSachBaiHat.updateSelectedPosition(position);
 	}
 
 }

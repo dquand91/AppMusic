@@ -20,6 +20,7 @@ public class Fragment_PlayDanhSachBaiHat extends Fragment {
 
 	View view;
 	RecyclerView recyclerViewPlayNhac;
+
 	PlayDanhSachBaiHatAdapter playDanhSachBaiHatAdapter;
 
 
@@ -37,6 +38,11 @@ public class Fragment_PlayDanhSachBaiHat extends Fragment {
 		}
 
 		return view;
+	}
+
+	public void updateSelectedPosition(int selectedPosition){
+		playDanhSachBaiHatAdapter.setSelected_position(selectedPosition);
+		playDanhSachBaiHatAdapter.notifyDataSetChanged();
 	}
 
 }
