@@ -64,4 +64,8 @@ public interface DataserviceListener {
     @POST("updateluotthich.php")
     Call<String> updateLuotThich(@Field("luotthich") String luotThich, @Field("idbaihat") String idBaiHat);
 
+    @FormUrlEncoded
+    @POST("searchbaihat.php")
+    Call<List<BaiHat>> getSeachBaiHat(@Field("tukhoa") String keyWord);
+
 }
